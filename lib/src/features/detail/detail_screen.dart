@@ -1,8 +1,7 @@
 import 'package:aisensy/src/core/bloc/home_bloc.dart';
 import 'package:aisensy/src/core/bloc/home_state.dart';
-import 'package:aisensy/src/core/constants/color_constants.dart';
-import 'package:aisensy/src/core/constants/string_constants.dart';
 import 'package:aisensy/src/core/model/home/home_model.dart';
+import 'package:aisensy/src/features/detail/widgets/detail_card.dart';
 import 'package:confetti/confetti.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -18,10 +17,10 @@ class DetailsScreen extends StatefulWidget {
   });
 
   @override
-  _DetailsScreenState createState() => _DetailsScreenState();
+  DetailsScreenState createState() => DetailsScreenState();
 }
 
-class _DetailsScreenState extends State<DetailsScreen> {
+class DetailsScreenState extends State<DetailsScreen> {
   late ConfettiController _confettiController;
 
   @override
@@ -66,7 +65,10 @@ class _DetailsScreenState extends State<DetailsScreen> {
                   gradient: LinearGradient(
                     begin: Alignment.topLeft,
                     end: Alignment.bottomRight,
-                    colors: [Colors.purple.shade100, Colors.orange.shade100],
+                    colors: [
+                      Colors.purple.shade100,
+                      Colors.orange.shade100,
+                    ],
                   ),
                 ),
                 child: Center(
@@ -81,73 +83,9 @@ class _DetailsScreenState extends State<DetailsScreen> {
                             Icons.arrow_back,
                           ),
                         ),
-                        Card(
-                          margin: EdgeInsets.all(16),
-                          elevation: 8,
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(16),
-                          ),
-                          child: Padding(
-                            padding: const EdgeInsets.all(16.0),
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.center,
-                              children: [
-                                GestureDetector(
-                                  onTap: () => showDialog(
-                                    context: context,
-                                    builder: (context) => InteractiveViewer(
-                                      child: GestureDetector(
-                                        onTap: () {
-                                          Navigator.pop(context);
-                                        },
-                                        child: FadeInImage.assetNetwork(
-                                          placeholder: 'assets/images/placeholder.png',
-                                          // Add a placeholder image
-                                          image: updatedPet.image,
-                                          fit: BoxFit.cover,
-                                          height: 200,
-                                          width: 200,
-                                        ),
-                                      ),
-                                    ),
-                                  ),
-                                  child: ClipRRect(
-                                    borderRadius: BorderRadius.circular(100),
-                                    child: FadeInImage.assetNetwork(
-                                      placeholder: 'assets/images/placeholder.png',
-                                      image: updatedPet.image,
-                                      height: 200,
-                                      width: 200,
-                                      fit: BoxFit.cover,
-                                    ),
-                                  ),
-                                ),
-                                SizedBox(height: 20),
-                                Text(
-                                  '${StringConstants.name}: ${updatedPet.name}',
-                                  style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
-                                ),
-                                Text(
-                                  '${StringConstants.age}: ${updatedPet.age} ${StringConstants.years}',
-                                  style: TextStyle(fontSize: 16),
-                                ),
-                                Text(
-                                  '${StringConstants.price}: \$${updatedPet.price}',
-                                  style: TextStyle(fontSize: 16),
-                                ),
-                                SizedBox(height: 20),
-                                updatedPet.adopted
-                                    ? Text(
-                                        StringConstants.alreadyAdopt,
-                                        style: TextStyle(color: ColorConstants.grey),
-                                      )
-                                    : ElevatedButton(
-                                        onPressed: widget.onAdopt,
-                                        child: Text(StringConstants.adoptMe),
-                                      ),
-                              ],
-                            ),
-                          ),
+                        DetailCard(
+                          onAdopt: widget.onAdopt,
+                          updatedPet: updatedPet,
                         ),
                       ],
                     ),

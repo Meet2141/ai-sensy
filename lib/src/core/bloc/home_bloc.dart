@@ -58,7 +58,7 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
   void _onViewAdoptedPets(ViewAdoptedPetsEvent event, Emitter<HomeState> emit) {
     final adoptedPets = _allPets.where((pet) => pet.adopted).toList();
     emit(HomeLoadedState(
-      displayedPets: adoptedPets, // Show only adopted pets
+      displayedPets: adoptedPets,
       adoptedPets: adoptedPets,
       currentPage: 1,
       itemsPerPage: adoptedPets.length,
@@ -75,7 +75,7 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
 
     emit(HomeLoadedState(
       displayedPets: displayedPets,
-      adoptedPets: adoptedPets, // Pass adopted pets
+      adoptedPets: adoptedPets,
       currentPage: _currentPage,
       itemsPerPage: _itemsPerPage,
       totalPets: filteredPets.length,
