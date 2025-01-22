@@ -80,7 +80,7 @@ class HomeScreen extends StatelessWidget {
                   child: GridView.builder(
                     gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                       crossAxisCount: 2,
-                      childAspectRatio: 0.7,
+                      childAspectRatio: 0.68,
                     ),
                     itemCount: state.displayedPets.length,
                     itemBuilder: (context, index) {
